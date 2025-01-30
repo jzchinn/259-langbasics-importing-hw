@@ -18,6 +18,7 @@
 # Load the readr package
 
 # ANSWER
+
 library(readr)
 
 ### QUESTION 2 ----- 
@@ -46,6 +47,17 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 
 # ANSWER
 
+# specify the file name
+file_name <- "data_A/6191_1.txt"
+
+# specify the column types
+col_types <- "dccl"
+
+# specify number of rows to skip
+skip_rows = 7
+
+# read the file
+ds1 <- read_tsv(file = file_name, col_names = col_names, col_types = col_types, skip = skip_rows)
 
 
 ### QUESTION 3 ----- 
@@ -55,6 +67,19 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 # Then write the new data to a CSV file in the "data_cleaned" folder
 
 # ANSWER
+
+# load tidyverse package
+library(tidyverse)
+
+# create new column that adds 100 to trial_num to the end of the df (starts at 101)
+ds1 <- ds1 %>% 
+  mutate(trial_num_transform = trial_num + 100)
+
+# create a new folder called data_cleaned
+dir.create("data_cleaned")
+
+# write the new dataframe to a csv file int eh data_cleaned folder
+write_csv(ds1, "data_cleaned/question_3.csv")
 
 
 ### QUESTION 4 ----- 
