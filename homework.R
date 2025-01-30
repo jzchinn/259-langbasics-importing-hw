@@ -89,6 +89,8 @@ write_csv(ds1, "data_cleaned/question_3.csv")
 
 # ANSWER
 
+data_a_files <- list.files("data_A", full.names = T)
+
 
 ### QUESTION 5 ----- 
 
@@ -96,6 +98,7 @@ write_csv(ds1, "data_cleaned/question_3.csv")
 
 # ANSWER
 
+ds <- read_tsv(file = data_a_files, col_names = col_names, col_types = col_types, skip = skip_rows)
 
 ### QUESTION 6 -----
 
@@ -109,6 +112,15 @@ write_csv(ds1, "data_cleaned/question_3.csv")
 
 # ANSWER
 
+# update col_types so trial_num is int
+col_types_6 <- "iccl"
+
+# read all the data into ds6; trial "ten" in 6191_5 is NA
+ds6 <- read_tsv(file = data_a_files, col_names = col_names, col_types = col_types_6, skip = skip_rows)
+
+# create the transformed trial number
+ds6 <- ds6 %>%
+  mutate(trial_num_transform = trial_num + 100)
 
 ### QUESTION 7 -----
 
